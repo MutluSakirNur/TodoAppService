@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  todoservice:
+    image: todoservice
+    container_name: todo_service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Izmir2019*
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+      - "/etc/timezone:/etc/timezone:ro" 
+      - "/etc/localtime:/etc/localtime:ro"

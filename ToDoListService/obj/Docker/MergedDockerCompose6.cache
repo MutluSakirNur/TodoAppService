@@ -1,0 +1,35 @@
+name: dockercompose4252988861316378338
+services:
+  sql-server-db:
+    container_name: sql-server-2022
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: A&VeryComplex123Password
+    image: mcr.microsoft.com/mssql/server
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 1433
+      published: "1433"
+      protocol: tcp
+  todolistapi:
+    build:
+      context: C:\Users\mutlusakir.nur\Desktop\TodoApp\ToDoListService
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: todolistapi
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      protocol: tcp
+    - mode: ingress
+      target: 5000
+      published: "5001"
+      protocol: tcp
+networks:
+  default:
+    name: dockercompose4252988861316378338_default

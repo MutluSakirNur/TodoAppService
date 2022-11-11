@@ -1,0 +1,42 @@
+name: dockercompose4252988861316378338
+services:
+  todoservice:
+    build:
+      context: C:\Users\mutlusakir.nur\Desktop\TodoApp\ToDoListService
+      dockerfile: Dockerfile
+    container_name: todo_service
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_Kestrel__Certificates__Default__Password: Izmir2019*
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+      ASPNETCORE_URLS: https://+:5001;https://+:80
+    image: todoservice
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "5001"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: /etc/localtime
+      target: /etc/localtime
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /etc/timezone
+      target: /etc/timezone
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\mutlusakir.nur\.aspnet\https
+      target: /https
+      read_only: true
+      bind:
+        create_host_path: true
+networks:
+  default:
+    name: dockercompose4252988861316378338_default
